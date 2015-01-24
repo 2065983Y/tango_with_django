@@ -13,8 +13,12 @@ def index(request):
 
 	return render(request, 'rango/index.html', context_dict)
 
-def about(requtest):
-	return HttpResponse("""Rango says here's dem about page lul 
-		<br/> <a href="/rango"> Home </a>
-		""")
+def about(request):
+	
+	context_dict = {"secret": 'Rango dem joker hue hue'}
+
+	return render(request, 'rango/about.html', context_dict)
+	#return HttpResponse("""Rango says here's dem about page lul 
+	#	<br/> <a href="/rango"> Home </a>
+	#	""")
 
