@@ -10,8 +10,13 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__)))
 
+TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
+
+TEMPLATE_DIRS = [
+#'/home/yanev/code/tango_with_django_project'
+TEMPLATE_PATH,] 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
