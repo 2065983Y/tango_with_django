@@ -55,6 +55,9 @@ target/
 
 # ignore all sqlite3 files & data bases
 *.sqlite3
+
 *.db
+
+.idea
 
 static/images/Thumbs.db
