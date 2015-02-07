@@ -53,6 +53,8 @@ docs/_build/
 # PyBuilder
 target/
 
-# ignore all sqlite3 files
+# ignore all sqlite3 files & data bases
 *.sqlite3
+*.db
 
+static/images/Thumbs.db
