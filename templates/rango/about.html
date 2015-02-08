@@ -1,28 +1,21 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
 {% load staticfiles %}
 
-<html>
+{% block title %} About {% endblock %}
 
-    <head>
-        <title>About</title>
-    </head>
+{% block body_block %}
+    <h1>This tutorial has been put together by Mihail Yanev(2065983y)</h1>
+    <br/>
+        Rango says here's dem about page lul
+    <br/>
+    <strong>{{ secret }}</strong><br />
 
-    <body>
-    	<h1>This tutorial has been put together by Mihail Yanev(2065983y)</h1>
-		<br/>
-		Rango says here's dem about page lul
-		<br/> 
-        <strong>{{ secret }}</strong><br />
-		
-		<p alignt="left"> Picture of myself on the left </p> <p align="center"> and </p> <p align="right"> aChapter 4 project's snapshot </p>
-		
-        
-        <img src = "{%static "images/meh.png" %}" width=640 height=480 alt="Picture of myself lol">
-		<img src = "{% static "images/proj.png" %}" alt="What was the project back then" align = "right" />
-		
-		<br/>
-		<a href="/rango/">Go home dear</a><br />
-		
-    </body>
+    <p alignt="left"> Picture of myself on the left </p> <p align="center"> and </p> <p align="right"> aChapter 4 project's snapshot </p>
+
+    <img src = "{%static "images/meh.png" %}" width=640 height=480 alt="Picture of myself lol">
+    <img src = "{% static "images/proj.png" %}" alt="What was the project back then" align = "right" />
+
+{% endblock %}
+
 
