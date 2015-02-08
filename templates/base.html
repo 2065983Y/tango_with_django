@@ -19,8 +19,10 @@
                 <li><a href="/rango/logout/">Logout</a></li>
                 <li><a href="/rango/add_category/">Add a New Category</a></li>
             {% else %}
+                {% block login_block %}
                 <li><a href="/rango/register/">Register Here</a></li>
                 <li><a href="/rango/login/">Login</a></li>
+                {% endblock %}
             {% endif %}
 
             </ul>

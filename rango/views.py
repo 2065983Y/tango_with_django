@@ -222,4 +222,4 @@ def category(request, category_name_slug):
 
 @login_required
 def restricted(request):
-    return HttpResponse("Shhh yo can see this")
+    return render(request, 'rango/restricted.html', {})
