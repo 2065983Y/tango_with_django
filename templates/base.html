@@ -16,12 +16,13 @@
             <ul>
             {% if user.is_authenticated %}
                 <li><a href="/rango/restricted/">Restricted Page</a></li>
-                <li><a href="/rango/logout/">Logout</a></li>
+                <li><a href="{% url 'auth_logout' %}">Logout</a></li>
                 <li><a href="/rango/add_category/">Add a New Category</a></li>
+                <li><a href="{% url 'auth_password_change' %}"> Change password</a></li>
             {% else %}
                 {% block login_block %}
-                <li><a href="/rango/register/">Register Here</a></li>
-                <li><a href="/rango/login/">Login</a></li>
+                <li><a href="{% url 'registration_register' %}">Register Here</a></li>
+                <li><a href="{% url 'auth_login' %}">Login</a></li>
                 {% endblock %}
             {% endif %}
 
