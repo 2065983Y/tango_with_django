@@ -16,7 +16,9 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 
 TEMPLATE_DIRS = [
 #'/home/yanev/code/tango_with_django_project'
-TEMPLATE_PATH,] 
+TEMPLATE_PATH,]
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
