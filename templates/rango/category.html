@@ -28,6 +28,10 @@
                 <strong>No pages currently in category.</strong>
         {% endif %}
 
+        {% if user.is_authenticated %}
+            <a href="{% url 'add_page' category.slug %}">Add a Page</a>
+        {% endif %}
+
         <div class="hero-unit">
             <div class="container-fluid">
                 <p>Search for a page.</p>

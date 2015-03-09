@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+<div class="page-header"><h1>Users</h1></div>
+    {% for user in users %}
+        <li><a href="{% url 'users' %}"> {{user}} </a>
+    {% endfor %}
+{% endblock %}

@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
-{% block title %}Profile{% endblock %}
-{% block body_block %}
-<div class="hero-unit">
-    <h1> Profile</h1><br/>
 
-            <h2>{{ user.username }}</h2>
+{% load staticfiles %}
 
-            <p>Email: {{ user.email }}</p>
-            {% if user_profile %}
-                <p>Website: <a href="{{ user_profile.website }}">{{ user_profile.website }}</a></p>
-                <br/>
-                {% if user_profile.picture %}
-                    <img src="{{ user_profile.picture.url }}"/>
-                {% endif %}
-            {% endif %}
-</div>
+{% block title %}{% endblock %} {% block body_block %}
+<form id="profile_form" method="post" action="{% url 'profile' %}" enctype="multipart/form-data"> {% csrf_token %} <br/>
+
+    <div class="container">
+        <h1>Edit Profile</h1>
+        {{ profile_form.as_p }}
+        <div class="row">
+            <div class="col-md-5"><img class="img-responsive" src="/media/{{picture}}" alt="profile_picture"/></div>
+        </div>
+        <br/>
+        {{ user_form.as_p }}
+
+        <input type="submit" name="submit" value="Edit"/></div>
+</form>
 {% endblock %}
