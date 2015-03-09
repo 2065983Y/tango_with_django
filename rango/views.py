@@ -1,9 +1,10 @@
 from datetime import datetime
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 from django.contrib.auth import  authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from rango.models import Category
+from rango.models import Category, UserProfile
 from rango.models import Page
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from rango.bing_search import run_query
@@ -115,7 +116,17 @@ def about(request):
 def category(request, category_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
+    context_dict['result_list'] = None
+    context_dict['query'] = None
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
 
+        print "Query: ", query
+        if query:
+            result_list = run_query(query)
+
+            context_dict['result_list'] = result_list
+            context_dict['query'] = query
     try:
         # Can we find a category name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
@@ -128,7 +139,7 @@ def category(request, category_name_slug):
 
         # Retrieve all of the associated pages.
         # Note that filter returns >= 1 model instance.
-        pages = Page.objects.filter(category=category)
+        pages = Page.objects.filter(category=category).order_by('-views')
 
         # Adds our results list to the template context under name pages.
         context_dict['pages'] = pages
@@ -139,6 +150,9 @@ def category(request, category_name_slug):
         # We get here if we didn't find the specified category.
         # Don't do anything - the template displays the "no category" message for us.
         pass
+
+    if not context_dict['query']:
+        context_dict['query'] = category.name
 
         # Go render the response and return it to the client.
     return render(request, 'rango/category.html', context_dict)
@@ -159,3 +173,63 @@ def search(request):
 
 
     return render(request, 'rango/search.html', {'result_list': result_list})
+
+def track_url(request):
+    print request
+    page_id = None
+    url = '/rango/'
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+            try:
+                page = Page.objects.get(id=page_id)
+                page.views += 1
+                page.save()
+                url = page.url
+            except:
+                pass
+
+    return redirect(url)
+
+def register_profile(request):
+    if request.method == 'POST':
+        profile_form = UserProfileForm(data=request.POST)
+
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+
+            if 'picture' in request.FILES:
+                profile.avatar = request.FILES['picture']
+            profile.save()
+            return redirect("/rango")
+        else:
+            print profile_form.errors
+    else:
+        profile_form = UserProfileForm()
+
+
+    return render(request, 'rango/profile_registration.html', {'profile_form': profile_form})
+
+@login_required
+def profile(request):
+    context_dict = {}
+    user = User.objects.get(username=request.user)
+
+    print "USER", user
+    print "USERS", UserProfile.objects
+
+    try:
+        user_profile = UserProfile.objects.get(user=user)
+        print user_profile.website
+    except:
+        user_profile = None
+        print "NOUSER"
+
+    context_dict['user'] = user
+    context_dict['user_profile'] = user_profile
+    return render(request, 'rango/profile.html', context_dict)
+
+    #if request.method == 'POST':
+    #    user_profile = UserProfileForm(data=request.POST)
+

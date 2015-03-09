@@ -52,6 +52,8 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
 
 class UserProfileForm(forms.ModelForm):
+    website=forms.URLField(help_text="Enter website", required=False)
+    picture=forms.ImageField(help_text="Choose avatar", required=False)
     class Meta:
         model = UserProfile
         fields = ('website', 'picture')
