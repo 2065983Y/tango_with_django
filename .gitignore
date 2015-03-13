@@ -59,7 +59,7 @@ target/
 *.db
 
 .idea
-
+media/
 static/images/Thumbs.db
 
 #rango/bing_key.py

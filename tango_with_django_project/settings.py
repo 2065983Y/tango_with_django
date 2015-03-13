@@ -27,11 +27,11 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SECRET_KEY = 'va%=+ojgn5=b)=fl&flf9b(kj43zmkbsw7=gf$flor18#wyete'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['2065983Y.pythonanywhere.com']
 
 #LOGIN_URL = '/rango/login/'
 
