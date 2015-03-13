@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 {% load rango_extras %}
+{% load staticfiles %}
 
 <html lang="en">
   <head>
@@ -59,6 +60,16 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-list">
+                <li class="nav-header">Find a Category</li>
+                <form>
+                    <label></label>
+                    <li><input class="search-query span10" type="text" name="suggestion" value="" id="suggestion"/></li>
+                </form>
+            </ul>
+
+            <div id="cats">
+            </div>
                 {% block side_block %}
                 {% get_category_list category %}
                 {% endblock %}
@@ -79,5 +90,7 @@
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="{% static 'js/rango-ajax.js' %}"></script>
+
   </body>
 </html>
